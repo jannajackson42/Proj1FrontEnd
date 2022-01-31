@@ -1,19 +1,23 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import LogOut from "../login/log-out";
 
 export default function ApproveorDeny(){
     const reimbIDInput = useRef(null);
     const userIDInput = useRef(null);
     const noteInput = useRef(null);
     const refreshPage = ()=>{window.location.reload()}
-    
+    const logout = ()=> localStorage.clear();
+
+    function logOut(){
+        logout();
+        navigate('/login');
+    }
 
     const navigate = useNavigate();
     async function ApproveReimb(notes:string){
         const reimbid = reimbIDInput.current.value;
         const empid = userIDInput.current.value;
-        const response = await fetch(`http://localhost:4000/employee/${empid}/${reimbid}/Approve`,{
+        const response = await fetch(`http://db16-73-24-92-136.ngrok.io/employee/${empid}/${reimbid}/Approve`,{
             method:'PATCH',
             body:JSON.stringify({notes}), 
             headers:{
@@ -25,7 +29,7 @@ export default function ApproveorDeny(){
     async function DenyReimb(notes:string){
         const reimbid = reimbIDInput.current.value;
         const empid = userIDInput.current.value;
-        const response = await fetch(`http://localhost:4000/employee/${empid}/${reimbid}/Deny`,{
+        const response = await fetch(`http://db16-73-24-92-136.ngrok.io/employee/${empid}/${reimbid}/Deny`,{
             method:'PATCH', 
             body: JSON.stringify({notes}),
             headers:{
@@ -41,7 +45,7 @@ export default function ApproveorDeny(){
         <button style= {{"marginLeft":"2%"}} type="button" className ="mx-2 btn btn-outline-secondary" onClick={()=>navigate("/view-my-reimbs")}>View My Reimbursements</button>
         <button style= {{"marginLeft":"2%"}} type="button" className ="mx-2 btn btn-outline-secondary" onClick={()=>navigate("/view-all-reimbs")}>View All Reimbursements</button>
         <button style= {{"marginLeft":"2%"}} type="button" className ="mx-2 btn btn-outline-secondary" onClick={()=>navigate("/manager-home")}>Back To Home</button>
-        <LogOut/>
+        <button type = "button" className ="mx-2 btn btn-outline-secondary" onClick = {()=>logOut()}>Log Out</button>
         </nav>
     <h3 style= {{"marginLeft":"2%"}} className= "my-3">Approve or Deny a Reimbursement</h3> 
        <small style= {{"marginLeft":"2%"}} className="text-muted my-1">Confirm the required information, then click approve or deny. Notes are optional. </small><br/>

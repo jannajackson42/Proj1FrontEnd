@@ -15,10 +15,11 @@ export default function LoginPage(props:{updateUser:Function}){
                 password: passwordInput.current.value
             }
 
-            const response = await fetch('http://localhost:4000/login',
+            const response = await fetch('http://db16-73-24-92-136.ngrok.io/login',
                 {method:'PATCH',
                 body:JSON.stringify(loginPayload),
                 headers:{
+                'Accept':'application/json',
                 'Content-Type':'application/json'
             }})
             if(response.status === 400){

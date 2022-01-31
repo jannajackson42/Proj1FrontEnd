@@ -11,7 +11,7 @@ export default function ReimbTable(){
     const tableRows = reimbursements.map(b=><ReimbursementRow key={b.id}{...b}/>)
 
     async function getReimbs(){
-        const response = await fetch("http://localhost:4000/reimbursements")
+        const response = await fetch("http://db16-73-24-92-136.ngrok.io/reimbursements")
         const reimbursements:Reimbursement[] = await response.json();
         setReimbursements(reimbursements);
     }

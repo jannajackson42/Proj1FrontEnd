@@ -12,7 +12,7 @@ export default function ReimbTable(){
 
     async function getReimbs(){
         const id = localStorage.getItem("employeeID"); 
-        const response = await fetch(`http://localhost:4000/reimbursements/${id}`)
+        const response = await fetch(`http://db16-73-24-92-136.ngrok.io/reimbursements/${id}`)
         const reimbursements:Reimbursement[] = await response.json();
         setReimbursements(reimbursements);
     }

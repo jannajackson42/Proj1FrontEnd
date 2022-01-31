@@ -24,8 +24,6 @@ export default function App() {
 
   return(<>
 
-    {/* {!user.username ? <LoginPage updateUser={setUser}/>:} */}
-
 <BrowserRouter>
       <Routes>
         <Route path ='/' element = {<Navigate to= "/login"/>}/>

@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Reimbursement } from "../../dtos/dtos";
-import LogOut from "../login/log-out";
 
 export default function CreateReimbursementForm(){
     
@@ -9,7 +8,8 @@ export default function CreateReimbursementForm(){
     const dateInput = useRef(null);
     const amountInput = useRef(null);
     const empIDInput = localStorage.getItem("employeeID");
-    const refreshPage = ()=>{window.location.reload()}
+    
+
     
     const navigate = useNavigate();
     async function createReimb(){
@@ -21,7 +21,7 @@ export default function CreateReimbursementForm(){
             amount: amountInput.current.value,
             status:''
         }
-        const response = await fetch(`http://localhost:4000/employee/${empIDInput}`,{
+        const response = await fetch(`http://db16-73-24-92-136.ngrok.io/employee/${empIDInput}`,{
             method:'POST', 
             body:JSON.stringify(reimbursement),
             headers:{
